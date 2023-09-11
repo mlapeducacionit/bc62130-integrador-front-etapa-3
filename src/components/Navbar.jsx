@@ -2,32 +2,30 @@ import "./Navbar.scss";
 
 const Navbar = () => {
   return (
-    <nav class="nav-bar">
-      {" "}
-      {/* <!-- nav-bar --> */}
-      <ul class="nav-bar__nav-list">
-        <li class="nav-bar__nav-item">
-          <a href="#" class="nav-bar__nav-link">
+    <nav className="nav-bar">
+      <ul className="nav-bar__nav-list">
+        <li className="nav-bar__nav-item">
+          <a href="#" className="nav-bar__nav-link">
             Inicio
           </a>
         </li>
-        <li class="nav-bar__nav-item">
-          <a href="#" class="nav-bar__nav-link">
+        <li className="nav-bar__nav-item">
+          <a href="#" className="nav-bar__nav-link">
             Alta
           </a>
         </li>
-        <li class="nav-bar__nav-item">
-          <a href="#" class="nav-bar__nav-link">
+        <li className="nav-bar__nav-item">
+          <a href="#" className="nav-bar__nav-link">
             Contacto
           </a>
         </li>
-        <li class="nav-bar__nav-item">
-          <a href="#" class="nav-bar__nav-link">
+        <li className="nav-bar__nav-item">
+          <a href="#" className="nav-bar__nav-link">
             Nosotros
           </a>
         </li>
       </ul>
-    </nav> /* <!-- nav-bar --> */
+    </nav>
   );
 };
 
