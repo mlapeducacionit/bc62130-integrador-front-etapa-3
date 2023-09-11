@@ -1,9 +1,11 @@
 import "./Header.scss";
+import Navbar from "./Navbar";
 
 const Header = () => {
   return (
     <header className="main-header">
       <input type="checkbox" id="menu" />
+      <Navbar />
       <div className="search-bar">
         <div className="search-bar__logo-container">Logo</div>
         <form action="" className="search-bar__form-container">
