@@ -1,16 +1,17 @@
 import './Card.scss'
 
-const Card = () => {
+const Card = ({ producto }) => {
+  // console.log(producto)
   return (
     <a className="card" href="#">
       <article className="card__article">
         <div className="card__image-container">
-          <img className="card__image" src="img/apple-iphone-11-pro-max.jpg" alt="IPhone 11 Pro Max" />
+          <img className="card__image" src={producto.foto} alt={producto.nombre} />
         </div>
         <div className="card__content">
-          <h2 className="card__heading">Celular</h2>
+          <h2 className="card__heading">{producto.nombre}</h2>
           <div className="card__description">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam obcaecati tempora, ratione facilis totam maiores!</p>
+            <p>{producto.detalles}</p>
           </div>
         </div>
       </article>
