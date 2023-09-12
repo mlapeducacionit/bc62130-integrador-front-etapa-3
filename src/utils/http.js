@@ -16,3 +16,23 @@ export const get = async (url) => {
     }
 
 }
+
+export const post = async (url, dato) => { 
+    try {
+        const config = {
+            method: 'POST',
+            headers: { 'context-type': 'application/json'},
+            body: JSON.stringify(dato)
+        }
+        const respuesta = await fetch(url, config)
+        if ( !respuesta.ok ) {
+            throw new Error(`Algo paso: ${respuesta.status}, ${respuesta.statusText}`)
+        }
+        const productoGuardado = await respuesta.json()
+        return productoGuardado
+
+    } catch (error) {
+        console.error(`ERROR POST`, error)
+    }
+
+}
