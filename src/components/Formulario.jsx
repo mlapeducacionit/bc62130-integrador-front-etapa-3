@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import ProductoContext from '../contexts/ProductoContext'
 
 const formInicial = {
   id: null,
@@ -14,6 +15,7 @@ const formInicial = {
 
 const Formulario = () => {
   const [form, setForm] = useState(formInicial)
+  const { crearProductoContext } = useContext(ProductoContext)
 
   const handleChange = (e) => {
     const { type, name, checked, value } = e.target
@@ -23,7 +25,10 @@ const Formulario = () => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault() // Detener el comportamiento del formulario
+    
+    await crearProductoContext(form)
 
   }
   const handleReset = ()  => {
@@ -35,7 +40,7 @@ const Formulario = () => {
     <>
       <h3>Agregar : Editar</h3>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="lbl-nombre">Nombre</label>
           <input type="text" name="nombre" id="lbl-nombre" value={form.nombre} onChange={handleChange} />
@@ -70,7 +75,7 @@ const Formulario = () => {
         </div>
 
         <button type="submit">Guardar</button>
-        <button type="reset">Limpiar</button>
+        <button type="reset" onClick={handleReset}>Limpiar</button>
       </form>
     </>
   )

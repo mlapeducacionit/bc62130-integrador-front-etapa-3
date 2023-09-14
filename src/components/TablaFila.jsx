@@ -1,6 +1,23 @@
+import { useContext } from 'react'
 import './TablaFila.scss'
+import ProductoContext from '../contexts/ProductoContext'
 
 const TablaFila = ( { producto } ) => {
+  const { eliminarProductoContext } = useContext(ProductoContext)
+
+  const handleDelete = (id) => {
+
+    let isDelete = window.confirm(`
+      ¿Estás seguro de eliminar el producto con el 'id': ${id}
+    `)
+
+    if ( isDelete ) {
+      eliminarProductoContext(id)
+    } else {
+      return //break
+    }
+  }
+
   return (
     <tr>
       <td>{producto.nombre}</td>
@@ -15,7 +32,7 @@ const TablaFila = ( { producto } ) => {
       <td>{producto.envio ? 'SI' : 'NO'}</td>
       <td>
         <button>Editar</button>
-        <button>Borrar</button>
+        <button onClick={() => handleDelete(producto.id)}>Borrar</button>
       </td>
     </tr>
   )

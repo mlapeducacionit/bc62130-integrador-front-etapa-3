@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { get } from "../utils/http";
+import { del, get, post } from "../utils/http";
 
 /* Creando CONTEXTO */
 /* 1er -> Creación del contexto */
@@ -24,7 +24,29 @@ const ProductoProvider = ( { children } ) => {
     }
    }
 
-    const data = { productos }
+   const crearProductoContext = async (productoNuevo) => {
+    try {
+        // Hago la petición (Guardo producto backend)
+        const productoBackNuevo = await post(url, productoNuevo)
+        // Actualizar el estado con el nuevo producto
+        setProductos([...productos, productoBackNuevo])
+    } catch (error) {
+        console.error('Falló crearProductoContext', error)
+    }
+   }
+
+   const eliminarProductoContext = async (id) => {
+    try {
+        const productoEliminado = await del(url, id)
+        console.log(productoEliminado) // {}
+        const nuevaDB = productos.filter(producto => producto.id !== id)
+        setProductos(nuevaDB)
+    } catch (error) {
+        console.log('Todo salió mal en el eliminarProductoContext', error)
+    }
+   }
+
+    const data = { productos, crearProductoContext, eliminarProductoContext }
 
     return <ProductoContext.Provider value={data}>{children}</ProductoContext.Provider>
 }

@@ -2,7 +2,6 @@
 export const get = async (url) => {
 
     try {
-
         const respuesta = await fetch(url) // objeto respuesta.
         console.log(respuesta)
         if ( !respuesta.ok ) {
@@ -21,7 +20,7 @@ export const post = async (url, dato) => {
     try {
         const config = {
             method: 'POST',
-            headers: { 'context-type': 'application/json'},
+            headers: { 'content-type': 'application/json'},
             body: JSON.stringify(dato)
         }
         const respuesta = await fetch(url, config)
@@ -33,6 +32,29 @@ export const post = async (url, dato) => {
 
     } catch (error) {
         console.error(`ERROR POST`, error)
+    }
+
+}
+
+export const del = async (url, id) => {
+    
+    const config = {
+        method: 'DELETE'
+    }
+    const urlFull = url + id
+    console.warn(urlFull)
+
+    try {
+        
+        const respuesta = await fetch(urlFull, config)
+        if ( !respuesta.ok ) {
+            throw new Error(`Algo paso: ${respuesta.status} ${respuesta.statusText}`)
+        }
+        const resultado = await respuesta.json()
+        return resultado
+
+    } catch (error) {
+        console.error('ERROR DELETE', error)
     }
 
 }
