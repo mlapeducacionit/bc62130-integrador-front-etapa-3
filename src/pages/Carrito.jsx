@@ -1,9 +1,31 @@
-import './Carrito.scss'
+import "./Carrito.scss";
 
 const Carrito = () => {
   return (
-    <div>Carrito</div>
-  )
-}
+    <>
+      <h1>Listado de productos en el carrrito</h1>
+      <table className="tabla-carrito">
+        <thead>
+          <tr>
+            <th>Foto</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>foto</td>
+            <td>nombre</td>
+            <td>cantidad</td>
+            <td>precio</td>
+            <td>acciones</td>
+          </tr>
+        </tbody>
+      </table>
+    </>
+  );
+};
 
-export default Carrito
+export default Carrito;
