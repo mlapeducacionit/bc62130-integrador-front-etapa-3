@@ -14,14 +14,17 @@ const CarritoProvider = ( { children} ) => {
     }
 
     const eliminarCarritoContext = (id) => {
-        // eliminarDelCarrito(id)
+        eliminarDelCarrito(id)
     }
 
     const guardarCarritoContext = () => {
-
+        /* Petición asincronica a nuestro banckend */
+        /* limpie el localStorage */
+        limpiarCarrito()
+        
     }
 
-    const data = {agregarCarritoContext, eliminarCarritoContext, guardarCarritoContext}
+    const data = {carrito, agregarCarritoContext, eliminarCarritoContext, guardarCarritoContext}
 
     return <CarritoContext.Provider value={data}>{children}</CarritoContext.Provider>
 }
