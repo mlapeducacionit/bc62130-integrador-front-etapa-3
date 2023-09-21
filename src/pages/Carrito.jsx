@@ -10,6 +10,13 @@ const Carrito = () => {
     eliminarCarritoContext(id)
   }
 
+  const calcularTotal = () => {
+    let sumaTotal = carrito.reduce((total, prod) => {
+      return total + (prod.precio * prod.cantidad)
+    }, 0)
+    return sumaTotal
+  }
+
   const handleComprar = () => {
     guardarCarritoContext()
   }
@@ -17,7 +24,7 @@ const Carrito = () => {
   return (
     <>
       <h1>Listado de productos en el carrrito</h1>
-      <button onClick={handleComprar}>Comprar</button>
+      { !carrito.length <= 0 && <button onClick={handleComprar}>Comprar</button>}
       <table className="tabla-carrito">
         <thead>
           <tr>
@@ -50,6 +57,11 @@ const Carrito = () => {
               ))
             )
           }
+          <tr>
+            <td colSpan={3}><strong>Total</strong></td>
+            <td><strong>${parseFloat(calcularTotal()).toFixed(2)}</strong></td>
+            <td></td>
+          </tr>
         </tbody>
       </table>
     </>
