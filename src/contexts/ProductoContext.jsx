@@ -6,7 +6,7 @@ import { del, get, post, put } from "../utils/http";
 const ProductoContext = createContext()
 
 /* 2do -> El armado del Provider */
-const url = 'https://maxi-etapa-3.onrender.com/api/productos/'
+const url = 'http://localhost:8080/api/productos/'
 
 const ProductoProvider = ( { children } ) => {
     const [productos, setProductos] = useState(null)
@@ -37,17 +37,8 @@ const ProductoProvider = ( { children } ) => {
 
    const actualizarProductoContext = async (productoEditar) => {
     try {
-        const productoEditado = await put(url, productoEditar._id, productoEditar)
-        console.log(productoEditado)
-        //const nuevaDB = productos.map( producto => producto._id === productoEditado._id ? productoEditado : producto )
-        const nuevaDB = productos.map( producto => {
-            if ( producto._id === productoEditar._id ) {
-                return productoEditar 
-            } else {
-                return producto 
-            }
-        })
-        console.log(nuevaDB)
+        const productoEditado = await put(url, productoEditar.id, productoEditar)
+        const nuevaDB = productos.map( producto => producto.id === productoEditado.id ? productoEditado : producto )
         setProductos(nuevaDB)
     } catch (error) {
         console.log('ERROR en actualizarProductoContext', error)
@@ -58,7 +49,7 @@ const ProductoProvider = ( { children } ) => {
     try {
         const productoEliminado = await del(url, id)
         console.log(productoEliminado) // {}
-        const nuevaDB = productos.filter(producto => producto._id !== id)
+        const nuevaDB = productos.filter(producto => producto.id !== id)
         setProductos(nuevaDB)
     } catch (error) {
         console.log('Todo salió mal en el eliminarProductoContext', error)
