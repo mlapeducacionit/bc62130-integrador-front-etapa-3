@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import ProductoContext from '../contexts/ProductoContext'
 import { useForm } from '../hooks/useForm'
+import DragDrop from './DragDrop'
 
 const formInicial = {
   id: null,
@@ -15,6 +16,10 @@ const formInicial = {
 }
 
 const Formulario = ({ productoAEditar, setProductoAEditar}) => {
+  // Estados del drag and drop
+  const [foto, setFoto] = useState('')
+  const [srcImagen, setSrcImagen] = useState('')
+
   const [form, setForm, handleChange] = useForm(formInicial)
   const { crearProductoContext, actualizarProductoContext } = useContext(ProductoContext)
 
@@ -27,9 +32,11 @@ const Formulario = ({ productoAEditar, setProductoAEditar}) => {
     e.preventDefault() // Detener el comportamiento del formulario
     try {
       if ( form.id === null ) {
-        await crearProductoContext(form)
+        const productoNuevo = {...form, ...foto}
+        await crearProductoContext(productoNuevo)
       } else {
-        await actualizarProductoContext(form)
+        const productoEditado = {...form, ...foto}
+        await actualizarProductoContext(productoEditado)
       }
       handleReset()
     } catch (error) {
@@ -73,10 +80,16 @@ const Formulario = ({ productoAEditar, setProductoAEditar}) => {
           <label htmlFor="lbl-detalles">Detalles</label>
           <input type="text" name="detalles" id="lbl-detalles" value={form.detalles} onChange={handleChange} />
         </div>
-        <div>
+       {/*  <div>
           <label htmlFor="lbl-foto">Foto</label>
           <input type="text" name="foto" id="lbl-foto" value={form.foto} onChange={handleChange} />
-        </div>
+        </div> */}
+
+        <DragDrop
+          setFoto={setFoto}
+          setSrcImagen={setSrcImagen}
+          srcImagen={srcImagen} />
+
         <div>
           <label htmlFor="lbl-envio">Envío</label>
           <input type="checkbox" name="envio" id="lbl-envio" checked={form.envio} onChange={handleChange} />
