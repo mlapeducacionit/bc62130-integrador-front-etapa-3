@@ -24,7 +24,14 @@ const Formulario = ({ productoAEditar, setProductoAEditar}) => {
   const { crearProductoContext, actualizarProductoContext } = useContext(ProductoContext)
 
   useEffect(() => {
-    productoAEditar ? setForm(productoAEditar) : setForm(formInicial)
+    if ( productoAEditar ) {
+      setSrcImagen(productoAEditar.foto)
+      setForm(productoAEditar)
+    } else {
+      setForm(formInicial)
+    }
+
+    // productoAEditar ? setForm(productoAEditar) : setForm(formInicial)
   }, [productoAEditar, setProductoAEditar])
 
 
@@ -48,6 +55,7 @@ const Formulario = ({ productoAEditar, setProductoAEditar}) => {
   const handleReset = ()  => {
     setForm(formInicial)
     setProductoAEditar(null)
+    setSrcImagen('')
   }
 
 
